@@ -20,13 +20,13 @@ public class Main {
         boolean ok = true;
         while(ok) {
             System.out.println("1.Creeaza user ");
-            System.out.println("2.Adaduga restaurant ");
-            System.out.println("3.Adaduga produs la local ");
+            System.out.println("2.Adauga restaurant ");
+            System.out.println("3.Adauga produs la local ");
             System.out.println("4.Afiseaza meniu restaurant ");
-            System.out.println("5.Adaduga magazin ");
+            System.out.println("5.Adauga magazin ");
             System.out.println("6.Adaduga comanda restaurant ");
             System.out.println("7.Adauga sofer ");
-            System.out.println("8.Adaduga comanda magazin ");
+            System.out.println("8.Adauga comanda magazin ");
             System.out.println("9.Afiseaza comenziile fiecarui user ");
             System.out.println("10.Afiseaza comenziile in ordine cresc dupa pret");
             System.out.println("11. Opreste");
