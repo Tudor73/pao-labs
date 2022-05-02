@@ -10,7 +10,7 @@ import java.util.Scanner;
 
 public class ComandaLocal extends Comanda {
     private Local local;
-    private List<Produs> produseComandate = new ArrayList<Produs>();
+    private List<Produs> produseComandate = new ArrayList<>();
 
     public ComandaLocal() {
         super();
