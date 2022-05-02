@@ -6,6 +6,7 @@ import Local.*;
 import Produs.*;
 import Persoana.*;
 
+
 import java.util.*;
 
 public class MainService implements IMainService{
@@ -13,13 +14,16 @@ public class MainService implements IMainService{
     private List<Local> localuri = new ArrayList<Local>();
     private List<Comanda> comenzi = new ArrayList<Comanda>();
     private List<Sofer> soferi = new ArrayList<Sofer>();
+    private UserCSV userCSV = UserCSV.getInstance();
+
     private static MainService instance = null;
 
     private MainService() {
         useri.add(new User("Andrei", "Mihai"));
         localuri.add(new Restaurant("Mcdonalds", "8.00-24.00", "123 King Street", "fast-food"));
         soferi.add(new Sofer("Popescu", "Andi", "072137648"));
-
+        userCSV.getCSVData();
+        userCSV.writeToCSV();
     }
     public static MainService getInstance() {
         if (instance == null) {
@@ -32,6 +36,8 @@ public class MainService implements IMainService{
     public User creeazaUser(Scanner in) {
         User user = new User(in);
         this.useri.add(user);
+        userCSV.setUsers(this.useri);
+        userCSV.writeToCSV();
         return user;
     }
 
