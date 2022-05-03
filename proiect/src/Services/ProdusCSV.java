@@ -45,7 +45,7 @@ public class ProdusCSV {
         }
         return data;
     }
-    public void getCSVData() {
+    public List<Produs> getCSVData() {
         List<String[]> data = instance.getUsersFromFile("data/produs.csv");
         for(var objectData : data) {
             Produs newProdus = new Produs(
@@ -56,17 +56,18 @@ public class ProdusCSV {
             );
             this.produse.add(newProdus);
         }
-
+    return this.produse;
     }
 
-    public void writeToCSV() {
+    public void writeToCSV(Produs p) {
 
         try {
             FileWriter out = new FileWriter("data/produs.csv", true);
-            for (var produs : this.produse) {
-                out.write(produs.toCSV());
-                out.write("\n");
-            }
+//            for (var produs : this.produse) {
+//                out.write(produs.toCSV());
+//                out.write("\n");
+//            }
+            out.write(p.toCSV());
             out.close();
         } catch (IOException e) {
             System.out.println(e.toString());

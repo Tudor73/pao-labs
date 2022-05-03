@@ -13,14 +13,14 @@ import java.util.List;
 public class SoferCSV {
 
     private static SoferCSV instance = null;
-    private List<Sofer> users = new ArrayList<>();
+    private List<Sofer> soferi = new ArrayList<>();
 
     public List<Sofer> getUsers() {
-        return users;
+        return soferi;
     }
 
     public void setUsers(List<Sofer> users) {
-        this.users = users;
+        this.soferi = users;
     }
 
     public static SoferCSV getInstance() {
@@ -45,7 +45,7 @@ public class SoferCSV {
         }
         return data;
     }
-    public void getCSVData() {
+    public List<Sofer> getCSVData() {
         List<String[]> data = instance.getUsersFromFile("data/sofer.csv");
         for(var objectData : data) {
             Sofer newSofer = new Sofer(
@@ -53,19 +53,20 @@ public class SoferCSV {
                     objectData[1],
                     objectData[2]
             );
-            this.users.add(newSofer);
+            this.soferi.add(newSofer);
         }
-
+        return this.soferi;
     }
 
-    public void writeToCSV() {
+    public void writeToCSV(Sofer s) {
 
         try {
             FileWriter out = new FileWriter("data/sofer.csv", true);
-            for (var user : this.users) {
-                out.write(user.toCSV());
-                out.write("\n");
-            }
+//            for (var sofer : this.soferi) {
+//                out.write(sofer.toCSV());
+//                out.write("\n");
+//            }
+            out.write(s.toCSV());
             out.close();
         } catch (IOException e) {
             System.out.println(e.toString());

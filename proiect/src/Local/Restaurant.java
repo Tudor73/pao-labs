@@ -39,7 +39,9 @@ public class Restaurant extends Local {
         return super.toString() + "tip:" + this.tipRestaurant + "\n";
 
     }
-
+    public String toCSV() {
+        return numeLocal + "," + program + "," + adresa + "," + tipRestaurant;
+    }
     // GETTERS AND SETTERS
     public String getTipRestaurant() {
         return tipRestaurant;

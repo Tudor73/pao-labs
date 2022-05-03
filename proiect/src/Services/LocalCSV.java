@@ -14,14 +14,14 @@ import java.util.List;
 public class LocalCSV {
 
     private static LocalCSV instance = null;
-    private List<Local> users = new ArrayList<>();
+    private List<Local> locals = new ArrayList<>();
 
     public List<Local> getUsers() {
-        return users;
+        return locals;
     }
 
     public void setUsers(List<Local> users) {
-        this.users = users;
+        this.locals = users;
     }
 
     public static LocalCSV getInstance() {
@@ -46,7 +46,7 @@ public class LocalCSV {
         }
         return data;
     }
-    public void getCSVData() {
+    public List<Local> getCSVData() {
         List<String[]> data = instance.getUsersFromFile("data/locale.csv");
         for(var objectData : data) {
             Local newLocal = new Restaurant(
@@ -56,19 +56,20 @@ public class LocalCSV {
                     objectData[3]
 
             );
-            this.users.add(newLocal);
+            this.locals.add(newLocal);
         }
-
+        return this.locals;
     }
 
-    public void writeToCSV() {
+    public void writeToCSV(Local l) {
 
         try {
             FileWriter out = new FileWriter("data/locale.csv", true);
-            for (var user : this.users) {
-                out.write(user.toCSV());
-                out.write("\n");
-            }
+//            for (var local : this.locals) {
+//                out.write(local.toCSV());
+//                out.write("\n");
+//            }
+            out.write(l.toCSV());
             out.close();
         } catch (IOException e) {
             System.out.println(e.toString());

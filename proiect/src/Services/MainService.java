@@ -14,16 +14,25 @@ public class MainService implements IMainService{
     private List<Local> localuri = new ArrayList<Local>();
     private List<Comanda> comenzi = new ArrayList<Comanda>();
     private List<Sofer> soferi = new ArrayList<Sofer>();
+    private List<Produs> produse = new ArrayList<>();
+
     private UserCSV userCSV = UserCSV.getInstance();
+    private LocalCSV localCSV = LocalCSV.getInstance();
+    private SoferCSV soferCSV = SoferCSV.getInstance();
+    private ProdusCSV produsCSV= ProdusCSV.getInstance();
+
 
     private static MainService instance = null;
 
     private MainService() {
-        useri.add(new User("Andrei", "Mihai"));
-        localuri.add(new Restaurant("Mcdonalds", "8.00-24.00", "123 King Street", "fast-food"));
-        soferi.add(new Sofer("Popescu", "Andi", "072137648"));
-        userCSV.getCSVData();
-        userCSV.writeToCSV();
+//        useri.add(new User("Andrei", "Mihai"));
+//        localuri.add(new Restaurant("Mcdonalds", "8.00-24.00", "123 King Street", "fast-food"));
+//        soferi.add(new Sofer("Popescu", "Andi", "072137648"));
+        this.useri = userCSV.getCSVData();
+        this.produse = produsCSV.getCSVData();
+        this.localuri = localCSV.getCSVData();
+        this.soferi = soferCSV.getCSVData();
+
     }
     public static MainService getInstance() {
         if (instance == null) {
@@ -35,15 +44,14 @@ public class MainService implements IMainService{
     @Override
     public User creeazaUser(Scanner in) {
         User user = new User(in);
-        this.useri.add(user);
-        userCSV.setUsers(this.useri);
-        userCSV.writeToCSV();
+        userCSV.writeToCSV(user);
         return user;
     }
 
     @Override
     public Local adaugaRestaurant(Scanner in) {
         Local restaurant= new Restaurant(in);
+        localCSV.writeToCSV(restaurant);
         this.localuri.add(restaurant);
         return restaurant;
     }
@@ -51,6 +59,7 @@ public class MainService implements IMainService{
     @Override
     public Produs adaugaProdusLaLocal(Scanner in) {
         Produs p = new Produs(in);
+        produsCSV.writeToCSV(p);
         System.out.println("Id ul localului ( " + this.localuri.toString()  + "): ");
         int id = Integer.parseInt(in.nextLine());
         try {
@@ -68,23 +77,11 @@ public class MainService implements IMainService{
     @Override
     public Sofer adaugaSofer(Scanner in) {
         Sofer s = new Sofer(in);
+        soferCSV.writeToCSV(s);
         this.soferi.add(s);
         return s;
     }
 
-//    @Override
-//    public Produs adaugaProdusLaMagazin(Scanner in) {
-//        Produs p = new Produs(in);
-//        System.out.println("Id ul magazinului");
-//        int id = Integer.parseInt(in.nextLine());
-//        try {
-//            Magazin m =  (Magazin) localuri.get(id);
-//            m.adaugaProdusInMeniu(p);
-//        } catch (IndexOutOfBoundsException exception) {
-//            System.out.println("Nu exista magazin cu id-ul respectiv");
-//        }
-//        return p;
-//    }
 
     @Override
     public Comanda adaugaComandaRestaurant(Scanner in) {
@@ -136,7 +133,6 @@ public class MainService implements IMainService{
         comandaNoua.setSofer(sofer);
         return comandaNoua;
     }
-
 
     @Override
     public Comanda adaugaComandaMagazin(Scanner in) {
@@ -262,4 +258,17 @@ public class MainService implements IMainService{
         }
     }
 
+    //    @Override
+//    public Produs adaugaProdusLaMagazin(Scanner in) {
+//        Produs p = new Produs(in);
+//        System.out.println("Id ul magazinului");
+//        int id = Integer.parseInt(in.nextLine());
+//        try {
+//            Magazin m =  (Magazin) localuri.get(id);
+//            m.adaugaProdusInMeniu(p);
+//        } catch (IndexOutOfBoundsException exception) {
+//            System.out.println("Nu exista magazin cu id-ul respectiv");
+//        }
+//        return p;
+//    }
 }

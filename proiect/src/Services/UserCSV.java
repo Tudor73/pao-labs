@@ -44,7 +44,8 @@ public class UserCSV {
         }
         return data;
     }
-    public void getCSVData() {
+    public List<User> getCSVData() {
+        // gets all the data from the csv file
         List<String[]> data = instance.getUsersFromFile("data/users.csv");
         for(var objectData : data) {
             User newUser = new User(
@@ -53,17 +54,20 @@ public class UserCSV {
             );
             this.users.add(newUser);
         }
-
+        return this.users;
     }
 
-    public void writeToCSV() {
 
+
+    public void writeToCSV(User u) {
+        // writes a user to the csv file
         try {
             FileWriter out = new FileWriter("data/users.csv", true);
-            for (var user : this.users) {
-                out.write(user.toCSV());
-                out.write("\n");
-            }
+//            for (var user : this.users) {
+//                out.write(user.toCSV());
+//                out.write("\n");
+//            }
+            out.write(u.toCSV());
             out.close();
         } catch (IOException e) {
             System.out.println(e.toString());
