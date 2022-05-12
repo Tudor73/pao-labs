@@ -22,6 +22,9 @@ public class UserCSV {
         this.users = users;
     }
 
+    private UserCSV() {
+
+    }
     public static UserCSV getInstance() {
         if (instance == null) {
             instance = new UserCSV();

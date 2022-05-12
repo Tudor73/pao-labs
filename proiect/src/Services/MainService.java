@@ -10,10 +10,10 @@ import Persoana.*;
 import java.util.*;
 
 public class MainService implements IMainService{
-    private List<User> useri = new ArrayList<User>();
-    private List<Local> localuri = new ArrayList<Local>();
-    private List<Comanda> comenzi = new ArrayList<Comanda>();
-    private List<Sofer> soferi = new ArrayList<Sofer>();
+    private List<User> useri = new ArrayList<>();
+    private List<Local> localuri = new ArrayList<>();
+    private List<Comanda> comenzi = new ArrayList<>();
+    private List<Sofer> soferi = new ArrayList<>();
     private List<Produs> produse = new ArrayList<>();
 
     private UserCSV userCSV = UserCSV.getInstance();

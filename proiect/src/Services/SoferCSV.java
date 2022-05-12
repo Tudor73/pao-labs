@@ -23,13 +23,17 @@ public class SoferCSV {
         this.soferi = users;
     }
 
+    private SoferCSV() {
+
+    }
+
     public static SoferCSV getInstance() {
         if (instance == null) {
             instance = new SoferCSV();
         }
         return instance;
     }
-    private List<String[]> getUsersFromFile(String filename) {
+    private List<String[]> getDriversFromFile(String filename) {
         List<String[]> data = new ArrayList<>();
         try {
             BufferedReader in = new BufferedReader(new FileReader(filename));
@@ -41,12 +45,12 @@ public class SoferCSV {
             }
 
         } catch (IOException e) {
-            System.out.println("No users to read");
+            System.out.println("No drivers to read");
         }
         return data;
     }
     public List<Sofer> getCSVData() {
-        List<String[]> data = instance.getUsersFromFile("data/sofer.csv");
+        List<String[]> data = instance.getDriversFromFile("data/sofer.csv");
         for(var objectData : data) {
             Sofer newSofer = new Sofer(
                     objectData[0],

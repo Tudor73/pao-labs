@@ -24,13 +24,16 @@ public class LocalCSV {
         this.locals = users;
     }
 
+    private LocalCSV(){
+
+    }
     public static LocalCSV getInstance() {
         if (instance == null) {
             instance = new LocalCSV();
         }
         return instance;
     }
-    private List<String[]> getUsersFromFile(String filename) {
+    private List<String[]> getLocalsFromFile(String filename) {
         List<String[]> data = new ArrayList<>();
         try {
             BufferedReader in = new BufferedReader(new FileReader(filename));
@@ -42,12 +45,12 @@ public class LocalCSV {
             }
 
         } catch (IOException e) {
-            System.out.println("No users to read");
+            System.out.println("No locals to read");
         }
         return data;
     }
     public List<Local> getCSVData() {
-        List<String[]> data = instance.getUsersFromFile("data/locale.csv");
+        List<String[]> data = instance.getLocalsFromFile("data/locale.csv");
         for(var objectData : data) {
             Local newLocal = new Restaurant(
                     objectData[0],

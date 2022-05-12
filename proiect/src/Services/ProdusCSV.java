@@ -23,13 +23,16 @@ public class ProdusCSV {
         this.produse = produse;
     }
 
+    private ProdusCSV(){
+
+    }
     public static ProdusCSV getInstance() {
         if (instance == null) {
             instance = new ProdusCSV();
         }
         return instance;
     }
-    private List<String[]> getUsersFromFile(String filename) {
+    private List<String[]> getProduseFromFile(String filename) {
         List<String[]> data = new ArrayList<>();
         try {
             BufferedReader in = new BufferedReader(new FileReader(filename));
@@ -41,12 +44,12 @@ public class ProdusCSV {
             }
 
         } catch (IOException e) {
-            System.out.println("No users to read");
+            System.out.println("No products to read");
         }
         return data;
     }
     public List<Produs> getCSVData() {
-        List<String[]> data = instance.getUsersFromFile("data/produs.csv");
+        List<String[]> data = instance.getProduseFromFile("data/produs.csv");
         for(var objectData : data) {
             Produs newProdus = new Produs(
                     objectData[0],
