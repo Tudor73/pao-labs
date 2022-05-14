@@ -15,6 +15,13 @@ public class User {
     protected LocalDate dataInregistrarii;
     protected List<Comanda> comenzi = new ArrayList<Comanda>();
 
+    public User(int userId, String nume, String prenume, LocalDate dataInregistrarii) {
+        this.userId = userId;
+        this.nume = nume;
+        this.prenume = prenume;
+        this.dataInregistrarii = dataInregistrarii;
+    }
+
     public User(String nume, String prenume) {
         this.nume = nume;
         this.prenume = prenume;
@@ -39,6 +46,9 @@ public class User {
     public String toString() {
         return "id: " + this.userId + ", nume: " + this.nume + ", prenume: " + this.prenume +
                 ", data inregistrarii: " + this.dataInregistrarii.toString()+ "\n";
+    }
+    public String toCSV() {
+        return nume + "," + prenume;
     }
 
     // GETTERS AND SETTERS

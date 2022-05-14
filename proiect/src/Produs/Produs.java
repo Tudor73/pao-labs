@@ -31,7 +31,9 @@ public class Produs {
     public String toString() {
         return "{nume produs: " + this.nume + ", tip: " + this.tip + ", pret: " + this.pret + "greutate: " + this.greutate + "}\n";
     }
-
+    public String toCSV() {
+        return nume + "," + tip + "," + pret + ","+greutate;
+    }
 
     //GETTERS AND SETTERS
     public String getNume() {

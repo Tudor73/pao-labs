@@ -34,7 +34,9 @@ public class Sofer {
     public String toString() {
         return "id: " + this.soferId + ", numeSofer: " + this.nume + ", prenumeSofer: " + this.prenume + "\n";
     }
-
+    public String toCSV() {
+        return nume + "," + prenume + "," + numarTelefon;
+    }
     // GETTERS AND SETTERS
     public String getNume() {
         return nume;

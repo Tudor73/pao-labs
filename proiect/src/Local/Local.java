@@ -43,6 +43,10 @@ abstract public  class Local {
                 " adresa: " + this.adresa + '\n';
     }
 
+    public String toCSV() {
+        return numeLocal + "," + program + "," + adresa;
+    }
+
     // GETTERS AND SETTERS
     public String getNumeLocal() {
         return numeLocal;
