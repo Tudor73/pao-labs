@@ -15,11 +15,11 @@ public class SoferCSV {
     private static SoferCSV instance = null;
     private List<Sofer> soferi = new ArrayList<>();
 
-    public List<Sofer> getUsers() {
+    public List<Sofer> getSoferi() {
         return soferi;
     }
 
-    public void setUsers(List<Sofer> users) {
+    public void setSoferi(List<Sofer> users) {
         this.soferi = users;
     }
 

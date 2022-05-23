@@ -21,6 +21,14 @@ abstract public  class Local {
         this.localId = nrLocaluri;
     }
 
+    public Local(int id, String numeLocal, String program, String adresa) {
+        this.localId = id;
+        this.numeLocal = numeLocal;
+        this.program = program;
+        this.adresa = adresa;
+        Local.nrLocaluri += 1;
+    }
+
     public Local(Scanner in) {
         this.read(in);
         Local.nrLocaluri += 1;

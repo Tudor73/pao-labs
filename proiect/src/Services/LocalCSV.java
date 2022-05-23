@@ -16,11 +16,11 @@ public class LocalCSV {
     private static LocalCSV instance = null;
     private List<Local> locals = new ArrayList<>();
 
-    public List<Local> getUsers() {
+    public List<Local> getLocals() {
         return locals;
     }
 
-    public void setUsers(List<Local> users) {
+    public void setLocals(List<Local> users) {
         this.locals = users;
     }
 

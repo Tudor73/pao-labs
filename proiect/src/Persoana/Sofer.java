@@ -17,6 +17,13 @@ public class Sofer {
         Sofer.numarSoferi += 1;
         this.soferId = numarSoferi;
     }
+    public Sofer(int id, String nume, String prenume, String numarTelefon) {
+        this.soferId = id;
+        this.nume = nume;
+        this.prenume = prenume;
+        this.numarTelefon = numarTelefon;
+        Sofer.numarSoferi += 1;
+    }
     public Sofer(Scanner in) {
         this.read(in);
         Sofer.numarSoferi += 1;
@@ -64,6 +71,14 @@ public class Sofer {
 
     public int getSoferId() {
         return soferId;
+    }
+
+    public String getPrenume() {
+        return prenume;
+    }
+
+    public void setPrenume(String prenume) {
+        this.prenume = prenume;
     }
 
     public void setSoferId(int soferId) {

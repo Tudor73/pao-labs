@@ -5,6 +5,10 @@ import Comparators.PretComparator;
 import Local.*;
 import Produs.*;
 import Persoana.*;
+import repository.LocalRepository;
+import repository.ProdusRepository;
+import repository.SoferRepository;
+import repository.UserRepository;
 
 
 import java.util.*;
@@ -16,11 +20,16 @@ public class MainService implements IMainService{
     private List<Sofer> soferi = new ArrayList<>();
     private List<Produs> produse = new ArrayList<>();
 
-    private UserCSV userCSV = UserCSV.getInstance();
-    private LocalCSV localCSV = LocalCSV.getInstance();
-    private SoferCSV soferCSV = SoferCSV.getInstance();
-    private ProdusCSV produsCSV= ProdusCSV.getInstance();
+//    private UserCSV userCSV = UserCSV.getInstance();
+//    private LocalCSV localCSV = LocalCSV.getInstance();
+//    private SoferCSV soferCSV = SoferCSV.getInstance();
+//    private ProdusCSV produsCSV= ProdusCSV.getInstance();
 
+
+    private UserRepository userRepository = new UserRepository();
+    private SoferRepository soferRepository = new SoferRepository();
+    private LocalRepository localRepository = new LocalRepository();
+    private ProdusRepository produsRepository = new ProdusRepository();
 
     private static MainService instance = null;
 
@@ -28,11 +37,23 @@ public class MainService implements IMainService{
 //        useri.add(new User("Andrei", "Mihai"));
 //        localuri.add(new Restaurant("Mcdonalds", "8.00-24.00", "123 King Street", "fast-food"));
 //        soferi.add(new Sofer("Popescu", "Andi", "072137648"));
-        this.useri = userCSV.getCSVData();
-        this.produse = produsCSV.getCSVData();
-        this.localuri = localCSV.getCSVData();
-        this.soferi = soferCSV.getCSVData();
+//        this.useri = userCSV.getCSVData();
+//        this.produse = produsCSV.getCSVData();
+//        this.localuri = localCSV.getCSVData();
+//        this.soferi = soferCSV.getCSVData();
 
+        userRepository.createTable();
+        soferRepository.createTable();
+        localRepository.createTable();
+//        produsRepository.createTable();
+
+
+        this.useri = userRepository.getUsers();
+        this.localuri = localRepository.getLocaluri();
+        this.soferi = soferRepository.getSoferi();
+        this.produse= produsRepository.getProduse();
+
+        System.out.println(localuri.toString());
     }
     public static MainService getInstance() {
         if (instance == null) {
@@ -44,14 +65,17 @@ public class MainService implements IMainService{
     @Override
     public User creeazaUser(Scanner in) {
         User user = new User(in);
-        userCSV.writeToCSV(user);
+//        userCSV.writeToCSV(user);
+        userRepository.insertUser(user);
+        this.useri.add(user);
         return user;
     }
 
     @Override
     public Local adaugaRestaurant(Scanner in) {
         Local restaurant= new Restaurant(in);
-        localCSV.writeToCSV(restaurant);
+        localRepository.insertLocal(restaurant);
+//        localCSV.writeToCSV(restaurant);
         this.localuri.add(restaurant);
         return restaurant;
     }
@@ -59,14 +83,16 @@ public class MainService implements IMainService{
     @Override
     public Produs adaugaProdusLaLocal(Scanner in) {
         Produs p = new Produs(in);
-        produsCSV.writeToCSV(p);
+//        produsCSV.writeToCSV(p);
         System.out.println("Id ul localului ( " + this.localuri.toString()  + "): ");
         int id = Integer.parseInt(in.nextLine());
         try {
-            Local local = findLocalById(id);
+            Local local = this.findLocalById(id);
             if (local == null)
                 throw new NullPointerException();
+            p.setIdRestaurant(id);
             local.adaugaProdusInMeniu(p);
+            produsRepository.insertProdus(p);
         } catch(NullPointerException exception) {
             System.out.println("Id ul nu exista");
         }
@@ -77,7 +103,8 @@ public class MainService implements IMainService{
     @Override
     public Sofer adaugaSofer(Scanner in) {
         Sofer s = new Sofer(in);
-        soferCSV.writeToCSV(s);
+//        soferCSV.writeToCSV(s);
+        soferRepository.insertSofer(s);
         this.soferi.add(s);
         return s;
     }
@@ -256,6 +283,60 @@ public class MainService implements IMainService{
             System.out.println("Nu exista comenzi");
             return null;
         }
+    }
+
+    //DELETE
+    public void deleteUser(int id) {
+        this.useri.removeIf(user -> Objects.equals(user.getUserId(), id));
+        userRepository.deleteUser(id);
+    }
+    public void deleteLocal(int id) {
+        this.produse.removeIf(p -> p.getIdRestaurant() == id);
+        this.localuri.removeIf(l -> Objects.equals(l.getLocalId(), id));
+        localRepository.deleteLocal(id);
+    }
+    public void deleteSofer(int id) {
+        this.soferi.removeIf(sofer -> Objects.equals(sofer.getSoferId(), id));
+        soferRepository.deleteSofer(id);
+    }
+    public void deleteProdus(int id) {
+        this.produse.removeIf(produs -> Objects.equals(produs.getId(), id));
+        produsRepository.deleteProdus(id);
+    }
+
+    // UPDATE
+
+    public void updateUserName(int id, String newName) {
+        for (User u : this.useri) {
+            if (u.getUserId() == id) {
+                u.setNume(newName);
+            }
+        }
+        userRepository.updateUserName(newName, id);
+    }
+    public void updateSoferName(int id, String newName) {
+        for (Sofer s : this.soferi) {
+            if (s.getSoferId() == id) {
+                s.setNume(newName);
+            }
+        }
+        soferRepository.updateSoferName(newName, id);
+    }
+    public void updateLocalName(int id, String newName) {
+        for (Local l : this.localuri) {
+            if (l.getLocalId() == id) {
+                l.setNumeLocal(newName);
+            }
+        }
+        localRepository.updateLocalName(newName, id);
+    }
+    public void updateProdusName(int id, String newName) {
+        for (Produs p : this.produse) {
+            if (p.getId() == id) {
+                p.setNume(newName);
+            }
+        }
+        produsRepository.updateProdusName(newName, id);
     }
 
     //    @Override

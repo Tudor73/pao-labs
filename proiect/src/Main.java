@@ -1,12 +1,15 @@
 import Comanda.*;
-import Local.Local;
+import Local.*;
 import Local.Magazin;
 import Persoana.Sofer;
 import Produs.Produs;
 import Persoana.User;
 import Services.AuditService;
 import Services.MainService;
-import Services.AuditService;
+import repository.LocalRepository;
+import repository.ProdusRepository;
+import repository.SoferRepository;
+import repository.UserRepository;
 
 import java.io.IOException;
 import java.util.HashMap;
@@ -34,7 +37,15 @@ public class Main {
             System.out.println("8.Adauga comanda magazin ");
             System.out.println("9.Afiseaza comenziile fiecarui user ");
             System.out.println("10.Afiseaza comenziile in ordine cresc dupa pret");
-            System.out.println("11. Opreste");
+            System.out.println("11.Sterge user");
+            System.out.println("12.Sterge local");
+            System.out.println("13.Sterge sofer");
+            System.out.println("14.Sterge produs");
+            System.out.println("15.Schimba nume user");
+            System.out.println("16.Schimba nume local");
+            System.out.println("17.Schimba nume sofer");
+            System.out.println("18.Schimba nume produs");
+            System.out.println("19. Opreste");
             System.out.println("Alege comanda: " );
             String optiune = in.nextLine();
             switch(optiune) {
@@ -80,7 +91,72 @@ public class Main {
                     List<Comanda> lista = service.getComenziInOrdineCresc();
                     System.out.println(lista.toString());
                     audit.logAction("get_comenzi_in_order");}
-                case "11" -> ok = false;
+                case "11" -> {
+                    System.out.println("Id ul userului: ");
+                    int id = in.nextInt();
+                    in.nextLine();
+                    service.deleteUser(id);
+                    System.out.println("User sters ");
+                }
+                case "12" -> {
+                    System.out.println("Id ul localului: ");
+                    int id = in.nextInt();
+                    in.nextLine();
+                    service.deleteLocal(id);
+                    System.out.println("Local sters ");
+                }
+                case "13" -> {
+                    System.out.println("Id ul soferului: ");
+                    int id = in.nextInt();
+                    in.nextLine();
+                    service.deleteSofer(id);
+                    System.out.println("Sofer sters ");
+                }
+                case "14" -> {
+                    System.out.println("Id ul produsului: ");
+                    int id = in.nextInt();
+                    in.nextLine();
+                    service.deleteUser(id);
+                    System.out.println("Produs sters ");
+                }
+                case "15" -> {
+                    System.out.println("Id ul userului: ");
+                    int id = in.nextInt();
+                    in.nextLine();
+                    System.out.println("Noul nume: ");
+                    String newName = in.nextLine();
+                    service.updateUserName(id, newName);
+                    System.out.println("Nume schimbat");
+                }
+                case "16" -> {
+                    System.out.println("Id ul localului: ");
+                    int id = in.nextInt();
+                    in.nextLine();
+                    System.out.println("Noul nume: ");
+                    String newName = in.nextLine();
+                    service.updateLocalName(id, newName);
+                    System.out.println("Nume schimbat");
+                }
+                case "17" -> {
+                    System.out.println("Id ul soferului: ");
+                    int id = in.nextInt();
+                    in.nextLine();
+                    System.out.println("Noul nume: ");
+                    String newName = in.nextLine();
+                    service.updateSoferName(id, newName);
+                    System.out.println("Nume schimbat");
+                }
+                case "18" -> {
+                    System.out.println("Id ul produsului: ");
+                    int id = in.nextInt();
+                    in.nextLine();
+                    System.out.println("Noul nume: ");
+                    String newName = in.nextLine();
+                    service.updateProdusName(id, newName);
+                    System.out.println("Nume schimbat");
+                }
+                case "19" -> ok = false;
+                default -> System.out.println("Optiune invalida");
             }
         }
     }

@@ -12,12 +12,16 @@ public class Restaurant extends Local {
     private String tipRestaurant;
     private List<Produs> meniuRestaurant = new ArrayList<Produs>();
 
+    public Restaurant(int id, String numeLocal, String program, String adresa) {
+        super(id,numeLocal, program, adresa);
+    }
 
     public Restaurant(String numeLocal, String program, String adresa, String tipRestaurant) {
         super(numeLocal, program, adresa);
         this.tipRestaurant = tipRestaurant;
         this.meniuRestaurant.add(new Produs("sare", "default", 1,1));
     }
+
     public Restaurant(Scanner in) {
         super(in);
         System.out.println("Tip restaurant: ");

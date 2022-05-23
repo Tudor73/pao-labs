@@ -22,6 +22,12 @@ public class User {
         this.dataInregistrarii = dataInregistrarii;
     }
 
+    public User(int userId, String nume, String prenume) {
+        this.userId = userId;
+        this.nume = nume;
+        this.prenume = prenume;
+    }
+
     public User(String nume, String prenume) {
         this.nume = nume;
         this.prenume = prenume;

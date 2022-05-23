@@ -3,20 +3,66 @@ package Produs;
 import java.util.Scanner;
 
 public class Produs {
+    static int nrProduse;
+    private int id;
     private String nume;
     private String tip;
     private double pret;
     private double greutate;
+    private int idRestaurant;
+
+    public Produs(String nume, String tip, double pret, double greutate, int idRestaurant) {
+        this.nume = nume;
+        this.tip = tip;
+        this.pret = pret;
+        this.greutate = greutate;
+        this.idRestaurant = idRestaurant;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public Produs(int id, String nume, String tip, double pret, double greutate, int idRestaurant) {
+        this.id = id;
+        this.nume = nume;
+        this.tip = tip;
+        this.pret = pret;
+        this.greutate = greutate;
+        this.idRestaurant = idRestaurant;
+        nrProduse++;
+    }
 
     public Produs(String nume, String tip, double pret, double greutate) {
         this.nume = nume;
         this.tip = tip;
         this.pret = pret;
         this.greutate = greutate;
+        nrProduse++;
+        this.id = nrProduse;
     }
     public Produs(Scanner in) {
         this.read(in);
+        nrProduse++;
+        this.id = nrProduse;
     }
+
+    public void setPret(double pret) {
+        this.pret = pret;
+    }
+
+    public int getIdRestaurant() {
+        return idRestaurant;
+    }
+
+    public void setIdRestaurant(int idRestaurant) {
+        this.idRestaurant = idRestaurant;
+    }
+
     public void read(Scanner in) {
         System.out.println("Nume: ");
         this.nume = in.nextLine();
